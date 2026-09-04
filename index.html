@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AÇIKGÖZ ISIR Studio — Metroloji & Teknik Resim Balonlama Yazılımı</title>
-  <meta name="description" content="Teknik resimler üzerinde yerel koordinat kilitli balonlama yapın, ölçüm verilerini AS9102 ve PPAP uyumlu kurumsal makrolu Excel (.xlsm) şablonlarına anında aktarın." />
+  <title>AÇIKGÖZ ISIR Studio</title>
+  <meta name="description" content="Teknik resimleri balonlama ve numune ölçüm raporlarını kolaylaştıran masaüstü aracı." />
   <link rel="icon" type="image/png" href="icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,6 @@
       --brand-orange-hover: #c2410c;
       --text-main: #f0f6fc;
       --text-muted: #8b949e;
-      --accent-green: #238636;
     }
 
     * {
@@ -80,6 +79,29 @@
       padding: 2px 8px;
       border-radius: 4px;
       font-weight: 600;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-btn {
+      background: #21262d;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .lang-btn:hover {
+      border-color: var(--brand-orange);
+      color: var(--brand-orange);
     }
 
     /* HERO */
@@ -253,24 +275,25 @@
         <span>AÇIKGÖZ ISIR Studio</span>
         <span class="badge">v1.0</span>
       </a>
-      <div>
-        <a href="#download" class="btn-primary" style="padding: 8px 18px; font-size: 0.9rem;">İndir (.exe)</a>
+      <div class="nav-actions">
+        <a href="#download" class="btn-primary" style="padding: 8px 18px; font-size: 0.9rem;" data-i18n="navDownload">İndir (.exe)</a>
+        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">🌐 EN</button>
       </div>
     </div>
   </nav>
 
   <!-- HERO SECTION -->
   <header class="hero container">
-    <h1>Metroloji Balonlama & Numune Ölçüm Raporları <span>Artık Dakikalar İçinde.</span></h1>
-    <p>
+    <h1 id="heroTitle">Metroloji Balonlama & Numune Ölçüm Raporları <span>Artık Dakikalar İçinde.</span></h1>
+    <p data-i18n="heroDesc">
       Teknik resimler üzerinde tek tıkla balonlama yapın. Ölçüleri, toleransları ve GD&T sembollerini kendi Excel şablonlarınıza hatasız aktarın.
     </p>
     <div class="hero-actions" id="download">
       <a href="https://github.com/tunahan00zz/Acikgoz_ISIR_Studio/releases" class="btn-primary">
         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        Windows İçin İndir (.exe)
+        <span data-i18n="btnDownload">Windows İçin İndir (.exe)</span>
       </a>
-      <a href="https://github.com/tunahan00zz/Acikgoz_ISIR_Studio" class="btn-secondary" target="_blank">
+      <a href="https://github.com/tunahan00zz/Acikgoz_ISIR_Studio" class="btn-secondary" target="_blank" data-i18n="btnGithub">
         GitHub'da İncele
       </a>
     </div>
@@ -279,83 +302,82 @@
   <!-- PREVIEW IMAGE -->
   <div class="container">
     <div class="mockup-wrap">
-      <!-- Programın en net ekran görüntüsünü bu isimle aynı klasöre koy -->
-      <img src="app-preview.png" alt="AÇIKGÖZ ISIR Studio Arayüzü" />
+      <img src="app-preview.png" alt="AÇIKGÖZ ISIR Studio" />
     </div>
   </div>
 
- <!-- STATS -->
+  <!-- STATS -->
   <div class="container stats-bar">
     <div class="stat-card">
       <div class="val">%70+</div>
-      <div class="lbl">Raporlama Süresi Tasarrufu</div>
+      <div class="lbl" data-i18n="stat1">Raporlama Süresi Tasarrufu</div>
     </div>
     <div class="stat-card">
       <div class="val">%100</div>
-      <div class="lbl" style="font-weight: 700; color: #f0f6fc;">Çevrimdışı & Güvenli</div>
-      <div class="lbl" style="font-size: 0.8rem; margin-top: 2px;">Sıfır Bulut Bağımlılığı</div>
+      <div class="lbl" style="font-weight: 700; color: #f0f6fc;" data-i18n="stat2Title">Çevrimdışı & Güvenli</div>
+      <div class="lbl" style="font-size: 0.8rem; margin-top: 2px;" data-i18n="stat2Desc">Sıfır Bulut Bağımlılığı</div>
     </div>
     <div class="stat-card">
       <div class="val">AS9102 / PPAP</div>
-      <div class="lbl">Endüstriyel Şablon Desteği</div>
+      <div class="lbl" data-i18n="stat3">Endüstriyel Şablon Desteği</div>
     </div>
   </div>
 
- <!-- CORE FEATURES -->
+  <!-- CORE FEATURES -->
   <section class="container features">
-    <h2>Neden AÇIKGÖZ ISIR Studio?</h2>
+    <h2 data-i18n="whyHeading">Neden AÇIKGÖZ ISIR Studio?</h2>
     <div class="grid">
-      <!-- 1. Balonlama -->
+      <!-- 1 -->
       <div class="card">
-        <h3>🎯 Tek Tıkla Pratik Balonlama</h3>
-        <p>
+        <h3 data-i18n="f1Title">🎯 Tek Tıkla Pratik Balonlama</h3>
+        <p data-i18n="f1Desc">
           Karmaşık menülerle uğraşmayın. Çizim üzerinde farenizle sadece tıklayarak balonları yerleştirin, numaralandırmayı ve sıralamayı programa bırakın.
         </p>
       </div>
 
-      <!-- 2. Şablon Entegrasyonu -->
+      <!-- 2 -->
       <div class="card">
-        <h3>📑 Kendi Excel Şablonlarınızı Kullanın</h3>
-        <p>
+        <h3 data-i18n="f2Title">📑 Kendi Excel Şablonlarınızı Kullanın</h3>
+        <p data-i18n="f2Desc">
           Fabrikanızın alışılagelmiş Excel veya makrolu şablonlarını sisteme kolayca tanıtın. Raporlarınızı mevcut şablon formatınızı hiç bozmadan doldurun.
         </p>
       </div>
 
-      <!-- 3. GD&T Kolaylığı -->
+      <!-- 3 -->
       <div class="card">
-        <h3>📐 GD&T Sembolleriyle Vakit Kaybetmeyin</h3>
-        <p>
+        <h3 data-i18n="f3Title">📐 GD&T Sembolleriyle Vakit Kaybetmeyin</h3>
+        <p data-i18n="f3Desc">
           Raporlara geometrik tolerans sembollerini tek tek resim olarak ekleme derdine son verin. İlgili tolerans ve sembolleri seçin, şablona otomatik yerleşsin.
         </p>
       </div>
 
-      <!-- 4. Görüntü Kalitesi -->
+      <!-- 4 -->
       <div class="card">
-        <h3>🔍 Kaliteden Ödün Vermeyen Netlik</h3>
-        <p>
+        <h3 data-i18n="f4Title">🔍 Kaliteden Ödün Vermeyen Netlik</h3>
+        <p data-i18n="f4Desc">
           Büyük ve karmaşık teknik resimlerde yakınlaştırma yapsanız bile çizimleriniz bulanıklaşmaz. En küçük tolerans notlarını bile net ve rahatça okuyun.
         </p>
       </div>
 
-      <!-- 5. Çevrimdışı Güvenlik (Tam Ortada) -->
+      <!-- 5 (Ortada Güvenlik) -->
       <div class="card" style="border-color: rgba(234, 88, 12, 0.4); background: rgba(234, 88, 12, 0.04);">
-        <h3>🔒 %100 Çevrimdışı & Güvenli</h3>
-        <p>
+        <h3 data-i18n="f5Title">🔒 %100 Çevrimdışı & Güvenli</h3>
+        <p data-i18n="f5Desc">
           Teknik resimleriniz ve şirket içi kalite verileriniz asla dışarı çıkmaz. İnternet bağlantısı gerektirmez, tamamen kendi bilgisayarınızda güvenle çalışır.
         </p>
       </div>
 
-      <!-- 6. İki Dil Desteği -->
+      <!-- 6 -->
       <div class="card">
-        <h3>🌍 Türkçe & İngilizce Arayüz</h3>
-        <p>
-          Hem yerel fason üretimleriniz hem de uluslararası müşterileriniz için hazırlanmış çift dil seçeneği ile arayüzü tek tuşla değiştirin.
+        <h3 data-i18n="f6Title">🌍 Çift Dil Desteği (TR / EN)</h3>
+        <p data-i18n="f6Desc">
+          Hem yerel üretim süreçleriniz hem de uluslararası denetimleriniz için hazırlanmış çift dil seçeneği ile arayüzü tek tuşla değiştirin.
         </p>
       </div>
     </div>
   </section>
 
- <!-- FOOTER -->
+  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
       <p>© 2026 Tunahan Açıkgöz — AÇIKGÖZ ISIR Studio.</p>
@@ -366,5 +388,75 @@
     </div>
   </footer>
 
+  <!-- DİL DEĞİŞTİRME MOTORU -->
+  <script>
+    const translations = {
+      tr: {
+        navDownload: "İndir (.exe)",
+        heroTitle: "Metroloji Balonlama & Numune Ölçüm Raporları <span>Artık Dakikalar İçinde.</span>",
+        heroDesc: "Teknik resimler üzerinde tek tıkla balonlama yapın. Ölçüleri, toleransları ve GD&T sembollerini kendi Excel şablonlarınıza hatasız aktarın.",
+        btnDownload: "Windows İçin İndir (.exe)",
+        btnGithub: "GitHub'da İncele",
+        stat1: "Raporlama Süresi Tasarrufu",
+        stat2Title: "Çevrimdışı & Güvenli",
+        stat2Desc: "Sıfır Bulut Bağımlılığı",
+        stat3: "Endüstriyel Şablon Desteği",
+        whyHeading: "Neden AÇIKGÖZ ISIR Studio?",
+        f1Title: "🎯 Tek Tıkla Pratik Balonlama",
+        f1Desc: "Karmaşık menülerle uğraşmayın. Çizim üzerinde farenizle sadece tıklayarak balonları yerleştirin, numaralandırmayı ve sıralamayı programa bırakın.",
+        f2Title: "📑 Kendi Excel Şablonlarınızı Kullanın",
+        f2Desc: "Fabrikanızın alışılagelmiş Excel veya makrolu şablonlarını sisteme kolayca tanıtın. Raporlarınızı mevcut şablon formatınızı hiç bozmadan doldurun.",
+        f3Title: "📐 GD&T Sembolleriyle Vakit Kaybetmeyin",
+        f3Desc: "Raporlara geometrik tolerans sembollerini tek tek resim olarak ekleme derdine son verin. İlgili tolerans ve sembolleri seçin, şablona otomatik yerleşsin.",
+        f4Title: "🔍 Kaliteden Ödün Vermeyen Netlik",
+        f4Desc: "Büyük ve karmaşık teknik resimlerde yakınlaştırma yapsanız bile çizimleriniz bulanıklaşmaz. En küçük tolerans notlarını bile net ve rahatça okuyun.",
+        f5Title: "🔒 %100 Çevrimdışı & Güvenli",
+        f5Desc: "Teknik resimleriniz ve şirket içi kalite verileriniz asla dışarı çıkmaz. İnternet bağlantısı gerektirmez, tamamen kendi bilgisayarınızda güvenle çalışır.",
+        f6Title: "🌍 Çift Dil Desteği (TR / EN)",
+        f6Desc: "Hem yerel üretim süreçleriniz hem de uluslararası denetimleriniz için hazırlanmış çift dil seçeneği ile arayüzü tek tuşla değiştirin."
+      },
+      en: {
+        navDownload: "Download (.exe)",
+        heroTitle: "Metrology Ballooning & Sample Inspection Reports <span>Now in Minutes.</span>",
+        heroDesc: "Balloon technical drawings with a single click. Seamlessly transfer dimensions, tolerances, and GD&T symbols into your own Excel templates.",
+        btnDownload: "Download for Windows (.exe)",
+        btnGithub: "View on GitHub",
+        stat1: "Reporting Time Savings",
+        stat2Title: "Offline & Secure",
+        stat2Desc: "Zero Cloud Dependency",
+        stat3: "Industrial Template Support",
+        whyHeading: "Why AÇIKGÖZ ISIR Studio?",
+        f1Title: "🎯 Practical Ballooning with One Click",
+        f1Desc: "Do not deal with complex menus. Place balloons simply by clicking on the drawing with your mouse; leave numbering and ordering to the software.",
+        f2Title: "📑 Use Your Own Excel Templates",
+        f2Desc: "Easily integrate your shop-floor's familiar standard or macro-enabled Excel templates. Fill out reports without altering your existing template layout.",
+        f3Title: "📐 Do Not Waste Time on GD&T Symbols",
+        f3Desc: "Put an end to inserting geometric tolerance symbols one by one as pictures. Select the relevant tolerance and symbols, and let them settle into the template automatically.",
+        f4Title: "🔍 Clarity Without Sacrificing Quality",
+        f4Desc: "Blueprints do not blur even when zooming in on large and complex technical drawings. Read even the smallest tolerance notes clearly and comfortably.",
+        f5Title: "🔒 100% Offline & Secure",
+        f5Desc: "Your technical drawings and proprietary quality data never leave your facility. Requires no internet connection, works safely on your own computer.",
+        f6Title: "🌍 Dual Language Support (TR / EN)",
+        f6Desc: "Switch the interface with a single click thanks to dual-language options built for both local manufacturing workflows and international audits."
+      }
+    };
+
+    let currentLang = 'tr';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'tr' ? 'en' : 'tr';
+      document.getElementById('langToggle').innerText = currentLang === 'tr' ? '🌐 EN' : '🌐 TR';
+
+      const hero = document.getElementById('heroTitle');
+      if (hero) hero.innerHTML = translations[currentLang].heroTitle;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+          el.innerText = translations[currentLang][key];
+        }
+      });
+    }
+  </script>
 </body>
 </html>
