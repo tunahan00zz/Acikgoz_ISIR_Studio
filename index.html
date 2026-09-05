@@ -33,6 +33,7 @@
       color: var(--text-main);
       line-height: 1.6;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     .container {
@@ -288,8 +289,8 @@
     <p data-i18n="heroDesc">
       Teknik resimler üzerinde tek tıkla balonlama yapın. Ölçüleri, toleransları ve GD&T sembollerini kendi Excel şablonlarınıza hatasız aktarın.
     </p>
-    <div class="hero-actions" id="download">
-      <a href="https://github.com/tunahan00zz/Acikgoz_ISIR_Studio/releases" class="btn-primary">
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">
         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
         <span data-i18n="btnDownload">Windows İçin İndir (.exe)</span>
       </a>
@@ -377,6 +378,24 @@
     </div>
   </section>
 
+  <!-- İndirme Alanı -->
+  <div id="download" style="max-width: 420px; margin: 30px auto 60px; padding: 24px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #f0f6fc; font-family: sans-serif;">
+    <h3 style="margin-top: 0;">AÇIKGÖZ ISIR Studio İndir</h3>
+    <p style="font-size: 0.85rem; color: #8b949e;">İndirmeyi başlatmak için bilgilerinizi giriniz.</p>
+
+    <form id="isirDownloadForm" style="display: flex; flex-direction: column; gap: 12px;">
+      <input type="text" id="userName" placeholder="Adınız Soyadınız" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
+      <input type="email" id="userEmail" placeholder="E-posta Adresiniz" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
+      <input type="text" id="userCompany" placeholder="Çalıştığınız Firma (İsteğe bağlı)" style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
+
+      <button type="submit" id="btnSubmitForm" style="padding: 12px; background: #ea580c; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer;">
+        Hemen İndir (.exe)
+      </button>
+    </form>
+
+    <div id="statusNotice" style="display: none; margin-top: 12px; font-size: 0.85rem;"></div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
@@ -458,64 +477,47 @@
       });
     }
   </script>
-  <!-- İndirme Alanı -->
-<div style="max-width: 420px; margin: 30px auto; padding: 24px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #f0f6fc; font-family: sans-serif;">
-  <h3 style="margin-top: 0;">AÇIKGÖZ ISIR Studio İndir</h3>
-  <p style="font-size: 0.85rem; color: #8b949e;">İndirmeyi başlatmak için bilgilerinizi giriniz.</p>
 
-  <form id="isirDownloadForm" style="display: flex; flex-direction: column; gap: 12px;">
-    <input type="text" id="userName" placeholder="Adınız Soyadınız" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
-    <input type="email" id="userEmail" placeholder="E-posta Adresiniz" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
-    <input type="text" id="userCompany" placeholder="Çalıştığınız Firma (İsteğe bağlı)" style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
+  <!-- FORM GÖNDERİM SCRIPTİ -->
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNjLrmuiDiaGptB-JQoanph16CbGyaoZuTgkWdiL89ypMlK_MlDOx8hdc5rVPFSdNsSQ/exec";
+    
+    // Test amaçlı geçici yönlendirme linki (Drive linkini buraya koyacaksın)
+    const DOWNLOAD_URL = "https://github.com/tunahan00zz";
 
-    <button type="submit" id="btnSubmitForm" style="padding: 12px; background: #ea580c; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer;">
-      Hemen İndir (.exe)
-    </button>
-  </form>
+    document.getElementById('isirDownloadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitForm');
+      const notice = document.getElementById('statusNotice');
 
-  <div id="statusNotice" style="display: none; margin-top: 12px; font-size: 0.85rem;"></div>
-</div>
+      btn.disabled = true;
+      btn.innerText = "İndirme Başlatılıyor...";
+      notice.style.display = "block";
+      notice.style.color = "#8b949e";
+      notice.innerText = "Kaydınız alınıyor, dosya indiriliyor...";
 
-<script>
-  // Google Apps Script'ten aldığın link
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNjLrmuiDiaGptB-JQoanph16CbGyaoZuTgkWdiL89ypMlK_MlDOx8hdc5rVPFSdNsSQ/exec";
-  
-  // Google Drive dosya ID'n
-  const DOWNLOAD_URL = "";
+      const payload = {
+        name: document.getElementById('userName').value,
+        email: document.getElementById('userEmail').value,
+        company: document.getElementById('userCompany').value
+      };
 
-  document.getElementById('isirDownloadForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('btnSubmitForm');
-    const notice = document.getElementById('statusNotice');
-
-    btn.disabled = true;
-    btn.innerText = "İndirme Başlatılıyor...";
-    notice.style.display = "block";
-    notice.style.color = "#8b949e";
-    notice.innerText = "Kaydınız alınıyor, dosya indiriliyor...";
-
-    const payload = {
-      name: document.getElementById('userName').value,
-      email: document.getElementById('userEmail').value,
-      company: document.getElementById('userCompany').value
-    };
-
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(() => {
-      window.location.href = DOWNLOAD_URL;
-      notice.style.color = "#3fb950";
-      notice.innerHTML = 'İndirme başladı! Başlamadıysa <a href="' + DOWNLOAD_URL + '" style="color:#ea580c;">buraya tıklayın</a>.';
-      btn.innerText = "İndirildi";
-    }).catch(() => {
-      window.location.href = DOWNLOAD_URL;
-      btn.innerText = "Hemen İndir (.exe)";
-      btn.disabled = false;
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        window.location.href = DOWNLOAD_URL;
+        notice.style.color = "#3fb950";
+        notice.innerHTML = 'İndirme başladı! Başlamadıysa <a href="' + DOWNLOAD_URL + '" style="color:#ea580c;">buraya tıklayın</a>.';
+        btn.innerText = "İndirildi";
+      }).catch(() => {
+        window.location.href = DOWNLOAD_URL;
+        btn.innerText = "Hemen İndir (.exe)";
+        btn.disabled = false;
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
