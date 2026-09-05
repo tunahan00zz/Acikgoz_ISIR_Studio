@@ -147,6 +147,8 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
+      border: none;
     }
     .btn-primary:hover {
       background: var(--brand-orange-hover);
@@ -360,7 +362,7 @@
         </p>
       </div>
 
-      <!-- 5 (Ortada Güvenlik) -->
+      <!-- 5 -->
       <div class="card" style="border-color: rgba(234, 88, 12, 0.4); background: rgba(234, 88, 12, 0.04);">
         <h3 data-i18n="f5Title">🔒 %100 Çevrimdışı & Güvenli</h3>
         <p data-i18n="f5Desc">
@@ -378,22 +380,23 @@
     </div>
   </section>
 
-  <!-- İndirme Alanı -->
-  <div id="download" style="max-width: 420px; margin: 30px auto 60px; padding: 24px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #f0f6fc; font-family: sans-serif;">
-    <h3 style="margin-top: 0;">AÇIKGÖZ ISIR Studio İndir</h3>
-    <p style="font-size: 0.85rem; color: #8b949e;">İndirmeyi başlatmak için bilgilerinizi giriniz.</p>
+  <!-- İNDİRME ALANI (FORM) -->
+  <div id="download" style="max-width: 440px; margin: 30px auto 60px; padding: 28px; background: #161b22; border: 1px solid #30363d; border-radius: 12px; color: #f0f6fc; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);">
+    <h3 style="margin-top: 0; font-size: 1.25rem;">AÇIKGÖZ ISIR Studio İndir</h3>
+    <p style="font-size: 0.88rem; color: #8b949e; margin-bottom: 18px;">İndirmeyi başlatmak için lütfen bilgilerinizi giriniz.</p>
 
     <form id="isirDownloadForm" style="display: flex; flex-direction: column; gap: 12px;">
-      <input type="text" id="userName" placeholder="Adınız Soyadınız" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
-      <input type="email" id="userEmail" placeholder="E-posta Adresiniz" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
-      <input type="text" id="userCompany" placeholder="Çalıştığınız Firma (İsteğe bağlı)" style="padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff;">
+      <input type="text" id="userName" placeholder="Adınız Soyadınız" required style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none;">
+      <input type="email" id="userEmail" placeholder="E-posta Adresiniz" required style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none;">
+      <input type="text" id="userCompany" placeholder="Çalıştığınız Firma (İsteğe bağlı)" style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none;">
 
-      <button type="submit" id="btnSubmitForm" style="padding: 12px; background: #ea580c; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer;">
-        Hemen İndir (.exe)
+      <button type="submit" id="btnSubmitForm" style="padding: 14px; background: #ea580c; border: none; border-radius: 6px; color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        <span>Hemen İndir (.exe)</span>
       </button>
     </form>
 
-    <div id="statusNotice" style="display: none; margin-top: 12px; font-size: 0.85rem;"></div>
+    <div id="statusNotice" style="display: none; margin-top: 14px; font-size: 0.88rem; text-align: center;"></div>
   </div>
 
   <!-- FOOTER -->
@@ -401,13 +404,13 @@
     <div class="container footer-inner">
       <p>© 2026 Tunahan Açıkgöz — AÇIKGÖZ ISIR Studio.</p>
       <div>
-        <a href="https://www.linkedin.com/in/tunahan-açıkgöz-180279340/" target="_blank" style="margin-right: 16px;">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/tunahan-a%C3%A7%C4%B1kg%C3%B6z-180279340/" target="_blank" style="margin-right: 16px;">LinkedIn</a>
         <a href="https://github.com/tunahan00zz" target="_blank">GitHub</a>
       </div>
     </div>
   </footer>
 
-  <!-- DİL DEĞİŞTİRME MOTORU -->
+  <!-- DİL VE GÖNDERİM SCRIPTİ -->
   <script>
     const translations = {
       tr: {
@@ -476,13 +479,11 @@
         }
       });
     }
-  </script>
 
-  <!-- FORM GÖNDERİM SCRIPTİ -->
-  <script>
+    // Google Apps Script Web App URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNjLrmuiDiaGptB-JQoanph16CbGyaoZuTgkWdiL89ypMlK_MlDOx8hdc5rVPFSdNsSQ/exec";
     
-    // Test amaçlı geçici yönlendirme linki (Drive linkini buraya koyacaksın)
+    // Test amaçlı yönlendirme linki (Drive doğrudan indirme linkini buraya koyacaksın)
     const DOWNLOAD_URL = "https://github.com/tunahan00zz";
 
     document.getElementById('isirDownloadForm').addEventListener('submit', function(e) {
@@ -510,7 +511,7 @@
       }).then(() => {
         window.location.href = DOWNLOAD_URL;
         notice.style.color = "#3fb950";
-        notice.innerHTML = 'İndirme başladı! Başlamadıysa <a href="' + DOWNLOAD_URL + '" style="color:#ea580c;">buraya tıklayın</a>.';
+        notice.innerHTML = 'İndirme başladı! Başlamadıysa <a href="' + DOWNLOAD_URL + '" style="color:#ea580c; font-weight:bold;">buraya tıklayın</a>.';
         btn.innerText = "İndirildi";
       }).catch(() => {
         window.location.href = DOWNLOAD_URL;
