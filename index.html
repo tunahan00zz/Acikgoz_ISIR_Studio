@@ -245,6 +245,25 @@
       line-height: 1.5;
     }
 
+    /* BOYDAN BOYA İNDİRME ŞERİDİ */
+    .download-section-wrap {
+      width: 100%;
+      background: linear-gradient(180deg, #0d121c 0%, #111724 100%);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 60px 0 70px;
+      margin: 40px 0;
+    }
+    .download-box {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 32px;
+      background: #161b22;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
     /* FOOTER */
     footer {
       border-top: 1px solid var(--card-border);
@@ -279,7 +298,7 @@
         <span class="badge">v1.0</span>
       </a>
       <div class="nav-actions">
-        <a href="#download" class="btn-primary" style="padding: 8px 18px; font-size: 0.9rem;" data-i18n="navDownload">İndir (.exe)</a>
+        <a href="#download" class="btn-primary" style="padding: 8px 18px; font-size: 0.9rem;" data-i18n="navDownload">İndir</a>
         <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">🌐 EN</button>
       </div>
     </div>
@@ -294,7 +313,7 @@
     <div class="hero-actions">
       <a href="#download" class="btn-primary">
         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        <span data-i18n="btnDownload">Windows İçin İndir (.exe)</span>
+        <span data-i18n="btnDownload">Windows İçin İndir</span>
       </a>
       <a href="https://github.com/tunahan00zz/Acikgoz_ISIR_Studio" class="btn-secondary" target="_blank" data-i18n="btnGithub">
         GitHub'da İncele
@@ -380,24 +399,28 @@
     </div>
   </section>
 
-  <!-- İNDİRME ALANI (FORM) -->
-  <div id="download" style="max-width: 440px; margin: 30px auto 60px; padding: 28px; background: #161b22; border: 1px solid #30363d; border-radius: 12px; color: #f0f6fc; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);">
-    <h3 style="margin-top: 0; font-size: 1.25rem;">AÇIKGÖZ ISIR Studio İndir</h3>
-    <p style="font-size: 0.88rem; color: #8b949e; margin-bottom: 18px;">İndirmeyi başlatmak için lütfen bilgilerinizi giriniz.</p>
+  <!-- BOYDAN BOYA İNDİRME ŞERİDİ -->
+  <section class="download-section-wrap" id="download">
+    <div class="container">
+      <div class="download-box">
+        <h3 style="margin-top: 0; font-size: 1.3rem; color: #fff;" data-i18n="formTitle">Açıkgöz ISIR Studio' yu İndir</h3>
+        <p style="font-size: 0.88rem; color: #8b949e; margin-bottom: 20px;" data-i18n="formDesc">İndirmeyi başlatmak için bilgilerinizi giriniz.</p>
 
-    <form id="isirDownloadForm" style="display: flex; flex-direction: column; gap: 12px;">
-      <input type="text" id="userName" placeholder="Adınız Soyadınız" required style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none;">
-      <input type="email" id="userEmail" placeholder="E-posta Adresiniz" required style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none;">
-      <input type="text" id="userCompany" placeholder="Çalıştığınız Firma (İsteğe bağlı)" style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none;">
+        <form id="isirDownloadForm" style="display: flex; flex-direction: column; gap: 14px;">
+          <input type="text" id="userName" placeholder="Adınız Soyadınız" required style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none; font-size: 0.95rem;">
+          <input type="email" id="userEmail" placeholder="E-posta Adresiniz" required style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none; font-size: 0.95rem;">
+          <input type="text" id="userCompany" placeholder="Çalıştığınız Firma (İsteğe bağlı)" style="padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #fff; outline: none; font-size: 0.95rem;">
 
-      <button type="submit" id="btnSubmitForm" style="padding: 14px; background: #ea580c; border: none; border-radius: 6px; color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        <span>Hemen İndir (.exe)</span>
-      </button>
-    </form>
+          <button type="submit" id="btnSubmitForm" style="padding: 14px; background: #ea580c; border: none; border-radius: 6px; color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            <span data-i18n="btnSubmitText">Hemen İndir</span>
+          </button>
+        </form>
 
-    <div id="statusNotice" style="display: none; margin-top: 14px; font-size: 0.88rem; text-align: center;"></div>
-  </div>
+        <div id="statusNotice" style="display: none; margin-top: 14px; font-size: 0.88rem; text-align: center;"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -410,14 +433,14 @@
     </div>
   </footer>
 
-  <!-- DİL VE GÖNDERİM SCRIPTİ -->
+  <!-- DİL VE GÖNDERİM MOTORU -->
   <script>
     const translations = {
       tr: {
-        navDownload: "İndir (.exe)",
+        navDownload: "İndir",
         heroTitle: "Metroloji Balonlama & Numune Ölçüm Raporları <span>Artık Dakikalar İçinde.</span>",
         heroDesc: "Teknik resimler üzerinde tek tıkla balonlama yapın. Ölçüleri, toleransları ve GD&T sembollerini kendi Excel şablonlarınıza hatasız aktarın.",
-        btnDownload: "Windows İçin İndir (.exe)",
+        btnDownload: "Windows İçin İndir",
         btnGithub: "GitHub'da İncele",
         stat1: "Raporlama Süresi Tasarrufu",
         stat2Title: "Çevrimdışı & Güvenli",
@@ -435,13 +458,16 @@
         f5Title: "🔒 %100 Çevrimdışı & Güvenli",
         f5Desc: "Teknik resimleriniz ve şirket içi kalite verileriniz asla dışarı çıkmaz. İnternet bağlantısı gerektirmez, tamamen kendi bilgisayarınızda güvenle çalışır.",
         f6Title: "🌍 Çift Dil Desteği (TR / EN)",
-        f6Desc: "Hem yerel üretim süreçleriniz hem de uluslararası denetimleriniz için hazırlanmış çift dil seçeneği ile arayüzü tek tuşla değiştirin."
+        f6Desc: "Hem yerel üretim süreçleriniz hem de uluslararası denetimleriniz için hazırlanmış çift dil seçeneği ile arayüzü tek tuşla değiştirin.",
+        formTitle: "Açıkgöz ISIR Studio' yu İndir",
+        formDesc: "İndirmeyi başlatmak için bilgilerinizi giriniz.",
+        btnSubmitText: "Hemen İndir"
       },
       en: {
-        navDownload: "Download (.exe)",
+        navDownload: "Download",
         heroTitle: "Metrology Ballooning & Sample Inspection Reports <span>Now in Minutes.</span>",
         heroDesc: "Balloon technical drawings with a single click. Seamlessly transfer dimensions, tolerances, and GD&T symbols into your own Excel templates.",
-        btnDownload: "Download for Windows (.exe)",
+        btnDownload: "Download for Windows",
         btnGithub: "View on GitHub",
         stat1: "Reporting Time Savings",
         stat2Title: "Offline & Secure",
@@ -459,7 +485,10 @@
         f5Title: "🔒 100% Offline & Secure",
         f5Desc: "Your technical drawings and proprietary quality data never leave your facility. Requires no internet connection, works safely on your own computer.",
         f6Title: "🌍 Dual Language Support (TR / EN)",
-        f6Desc: "Switch the interface with a single click thanks to dual-language options built for both local manufacturing workflows and international audits."
+        f6Desc: "Switch the interface with a single click thanks to dual-language options built for both local manufacturing workflows and international audits.",
+        formTitle: "Download AÇIKGÖZ ISIR Studio",
+        formDesc: "Enter your details to start the download.",
+        btnSubmitText: "Download Now"
       }
     };
 
@@ -480,10 +509,7 @@
       });
     }
 
-    // Google Apps Script Web App URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNjLrmuiDiaGptB-JQoanph16CbGyaoZuTgkWdiL89ypMlK_MlDOx8hdc5rVPFSdNsSQ/exec";
-    
-    // Test amaçlı yönlendirme linki (Drive doğrudan indirme linkini buraya koyacaksın)
     const DOWNLOAD_URL = "https://github.com/tunahan00zz";
 
     document.getElementById('isirDownloadForm').addEventListener('submit', function(e) {
@@ -515,7 +541,7 @@
         btn.innerText = "İndirildi";
       }).catch(() => {
         window.location.href = DOWNLOAD_URL;
-        btn.innerText = "Hemen İndir (.exe)";
+        btn.innerText = "Hemen İndir";
         btn.disabled = false;
       });
     });
