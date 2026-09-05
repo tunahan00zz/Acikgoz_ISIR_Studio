@@ -195,6 +195,7 @@
       width: 100%;
       height: auto;
       display: block;
+      transition: opacity 0.2s ease-in-out;
     }
 
     /* METRICS / STATS */
@@ -313,7 +314,6 @@
       <div class="nav-actions">
         <a href="#download" class="btn-primary" style="padding: 8px 18px; font-size: 0.9rem;" data-i18n="navDownload">İndir</a>
         
-        <!-- YENİ DİL SEÇİCİ -->
         <div class="lang-switcher">
           <button id="btnTr" class="lang-option active" onclick="setLanguage('tr')">TR</button>
           <button id="btnEn" class="lang-option" onclick="setLanguage('en')">EN</button>
@@ -339,10 +339,10 @@
     </div>
   </header>
 
-  <!-- PREVIEW IMAGE -->
+  <!-- PREVIEW IMAGE (DİLE GÖRE DEĞİŞİR) -->
   <div class="container">
     <div class="mockup-wrap">
-      <img src="app-preview.png" alt="AÇIKGÖZ ISIR Studio" />
+      <img id="appPreviewImg" src="app-preview-tr.png" onerror="this.src='app-preview.png'" alt="AÇIKGÖZ ISIR Studio" />
     </div>
   </div>
 
@@ -367,7 +367,6 @@
   <section class="container features">
     <h2 data-i18n="whyHeading">Neden AÇIKGÖZ ISIR Studio?</h2>
     <div class="grid">
-      <!-- 1 -->
       <div class="card">
         <h3 data-i18n="f1Title">🎯 Tek Tıkla Pratik Balonlama</h3>
         <p data-i18n="f1Desc">
@@ -375,7 +374,6 @@
         </p>
       </div>
 
-      <!-- 2 -->
       <div class="card">
         <h3 data-i18n="f2Title">📑 Kendi Excel Şablonlarınızı Kullanın</h3>
         <p data-i18n="f2Desc">
@@ -383,7 +381,6 @@
         </p>
       </div>
 
-      <!-- 3 -->
       <div class="card">
         <h3 data-i18n="f3Title">📐 GD&T Sembolleriyle Vakit Kaybetmeyin</h3>
         <p data-i18n="f3Desc">
@@ -391,7 +388,6 @@
         </p>
       </div>
 
-      <!-- 4 -->
       <div class="card">
         <h3 data-i18n="f4Title">🔍 Kaliteden Ödün Vermeyen Netlik</h3>
         <p data-i18n="f4Desc">
@@ -399,7 +395,6 @@
         </p>
       </div>
 
-      <!-- 5 -->
       <div class="card" style="border-color: rgba(234, 88, 12, 0.4); background: rgba(234, 88, 12, 0.04);">
         <h3 data-i18n="f5Title">🔒 %100 Çevrimdışı & Güvenli</h3>
         <p data-i18n="f5Desc">
@@ -407,7 +402,6 @@
         </p>
       </div>
 
-      <!-- 6 -->
       <div class="card">
         <h3 data-i18n="f6Title">🌍 Çift Dil Desteği (TR / EN)</h3>
         <p data-i18n="f6Desc">
@@ -479,7 +473,14 @@
         f6Desc: "Hem yerel üretim süreçleriniz hem de uluslararası denetimleriniz için hazırlanmış çift dil seçeneği ile arayüzü tek tuşla değiştirin.",
         formTitle: "Açıkgöz ISIR Studio' yu İndir",
         formDesc: "İndirmeyi başlatmak için bilgilerinizi giriniz.",
-        btnSubmitText: "Hemen İndir"
+        btnSubmitText: "Hemen İndir",
+        phName: "Adınız Soyadınız",
+        phEmail: "E-posta Adresiniz",
+        phCompany: "Çalıştığınız Firma (İsteğe bağlı)",
+        submitting: "İndirme Başlatılıyor...",
+        noticeSubmit: "Kaydınız alınıyor, dosya indiriliyor...",
+        statusSuccess: "İndirme başladı! Başlamadıysa",
+        statusClick: "buraya tıklayın"
       },
       en: {
         navDownload: "Download",
@@ -506,7 +507,14 @@
         f6Desc: "Switch the interface with a single click thanks to dual-language options built for both local manufacturing workflows and international audits.",
         formTitle: "Download AÇIKGÖZ ISIR Studio",
         formDesc: "Enter your details to start the download.",
-        btnSubmitText: "Download Now"
+        btnSubmitText: "Download Now",
+        phName: "Full Name",
+        phEmail: "Email Address",
+        phCompany: "Company / Department (Optional)",
+        submitting: "Starting Download...",
+        noticeSubmit: "Saving info and starting download...",
+        statusSuccess: "Download started! If not,",
+        statusClick: "click here"
       }
     };
 
@@ -515,11 +523,11 @@
     function setLanguage(lang) {
       currentLang = lang;
       
-      // Buton aktiflik sınıflarını güncelle
+      // Buton aktiflik sınıfları
       document.getElementById('btnTr').classList.toggle('active', lang === 'tr');
       document.getElementById('btnEn').classList.toggle('active', lang === 'en');
 
-      // Başlık ve metinleri çevir
+      // Başlık ve metinler
       const hero = document.getElementById('heroTitle');
       if (hero) hero.innerHTML = translations[lang].heroTitle;
 
@@ -529,6 +537,19 @@
           el.innerText = translations[lang][key];
         }
       });
+
+      // Form Placeholder kutucukları çevirisi
+      document.getElementById('userName').placeholder = translations[lang].phName;
+      document.getElementById('userEmail').placeholder = translations[lang].phEmail;
+      document.getElementById('userCompany').placeholder = translations[lang].phCompany;
+
+      // Dile göre önizleme resmi değişimi
+      const previewImg = document.getElementById('appPreviewImg');
+      if (lang === 'en') {
+        previewImg.src = 'app-preview-en.png';
+      } else {
+        previewImg.src = 'app-preview-tr.png';
+      }
     }
 
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNjLrmuiDiaGptB-JQoanph16CbGyaoZuTgkWdiL89ypMlK_MlDOx8hdc5rVPFSdNsSQ/exec";
@@ -540,10 +561,10 @@
       const notice = document.getElementById('statusNotice');
 
       btn.disabled = true;
-      btn.innerText = "İndirme Başlatılıyor...";
+      btn.innerText = translations[currentLang].submitting;
       notice.style.display = "block";
       notice.style.color = "#8b949e";
-      notice.innerText = "Kaydınız alınıyor, dosya indiriliyor...";
+      notice.innerText = translations[currentLang].noticeSubmit;
 
       const payload = {
         name: document.getElementById('userName').value,
@@ -559,11 +580,11 @@
       }).then(() => {
         window.location.href = DOWNLOAD_URL;
         notice.style.color = "#3fb950";
-        notice.innerHTML = 'İndirme başladı! Başlamadıysa <a href="' + DOWNLOAD_URL + '" style="color:#ea580c; font-weight:bold;">buraya tıklayın</a>.';
-        btn.innerText = "İndirildi";
+        notice.innerHTML = `${translations[currentLang].statusSuccess} <a href="${DOWNLOAD_URL}" style="color:#ea580c; font-weight:bold;">${translations[currentLang].statusClick}</a>.`;
+        btn.innerText = currentLang === 'tr' ? "İndirildi" : "Downloaded";
       }).catch(() => {
         window.location.href = DOWNLOAD_URL;
-        btn.innerText = "Hemen İndir";
+        btn.innerText = translations[currentLang].btnSubmitText;
         btn.disabled = false;
       });
     });
