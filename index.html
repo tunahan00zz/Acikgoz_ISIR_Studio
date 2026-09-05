@@ -84,25 +84,38 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
-    .lang-btn {
-      background: #21262d;
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
+
+    /* DİL SEÇİCİ SWITCH */
+    .lang-switcher {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
+      background: #161b22;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
     }
-    .lang-btn:hover {
-      border-color: var(--brand-orange);
-      color: var(--brand-orange);
+    .lang-option {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .lang-option:hover {
+      color: var(--text-main);
+    }
+    .lang-option.active {
+      background: var(--brand-orange);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(234, 88, 12, 0.3);
     }
 
     /* HERO */
@@ -299,7 +312,12 @@
       </a>
       <div class="nav-actions">
         <a href="#download" class="btn-primary" style="padding: 8px 18px; font-size: 0.9rem;" data-i18n="navDownload">İndir</a>
-        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">🌐 EN</button>
+        
+        <!-- YENİ DİL SEÇİCİ -->
+        <div class="lang-switcher">
+          <button id="btnTr" class="lang-option active" onclick="setLanguage('tr')">TR</button>
+          <button id="btnEn" class="lang-option" onclick="setLanguage('en')">EN</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -494,17 +512,21 @@
 
     let currentLang = 'tr';
 
-    function toggleLanguage() {
-      currentLang = currentLang === 'tr' ? 'en' : 'tr';
-      document.getElementById('langToggle').innerText = currentLang === 'tr' ? '🌐 EN' : '🌐 TR';
+    function setLanguage(lang) {
+      currentLang = lang;
+      
+      // Buton aktiflik sınıflarını güncelle
+      document.getElementById('btnTr').classList.toggle('active', lang === 'tr');
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
 
+      // Başlık ve metinleri çevir
       const hero = document.getElementById('heroTitle');
-      if (hero) hero.innerHTML = translations[currentLang].heroTitle;
+      if (hero) hero.innerHTML = translations[lang].heroTitle;
 
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-          el.innerText = translations[currentLang][key];
+        if (translations[lang][key]) {
+          el.innerText = translations[lang][key];
         }
       });
     }
